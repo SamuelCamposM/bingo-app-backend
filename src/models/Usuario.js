@@ -22,5 +22,9 @@ const UsuarioSchema = new Schema(
   },
   { timestamps: true }
 );
+UsuarioSchema.method("toJSON", function () {
+  const { __v, ...rest } = this.toObject();
+  return { ...rest, uid: rest._id };
+});
 
 export const UsuarioModel = model("Usuario", UsuarioSchema);
