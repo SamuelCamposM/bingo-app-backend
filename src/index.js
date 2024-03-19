@@ -5,7 +5,7 @@ config();
 
 import { dbConnection } from "./db/config";
 import { chatSocket } from "./sockets";
-import { authRouter } from "./routes";
+import { authRouter, pagesRouter } from "./routes";
 import { mensajesRouter } from "./routes/mensajes";
 import { createServer } from "http";
 import socketio from "socket.io";
@@ -22,6 +22,7 @@ app.use(express.static("public"));
 //ROUTER
 app.use("/api/auth", authRouter);
 app.use("/api/mensajes", mensajesRouter);
+app.use("/api/pages", pagesRouter);
 const server = createServer(app);
 const io = socketio(server, {
   cors: {

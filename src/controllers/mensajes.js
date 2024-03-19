@@ -1,22 +1,22 @@
 import { response } from "express";
-import { MensajeModel } from "../models/Mensaje";
+import { MensajeModel } from "../models";
 
 export const obtenerChat = async (req, res = response) => {
   try {
     const miId = req.uid;
     const mensajesDe = req.params.de;
 
-    const last30 = await MensajeModel.find({
+    let last30 = await MensajeModel.find({
       $or: [
         { de: miId, para: mensajesDe },
         { de: mensajesDe, para: miId },
       ],
     })
-      .sort({ createdAt: "asc" })
+      .sort({ createdAt: "desc" })
       .limit(30);
     res.json({
       ok: true,
-      mensajes: last30,
+      mensajes: last30.reverse(),
     });
   } catch (error) {
     res

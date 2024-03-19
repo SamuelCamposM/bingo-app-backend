@@ -1,5 +1,5 @@
 import { response } from "express";
-import { UsuarioModel } from "../models/";
+import { UsuarioModel } from "../models";
 import bcryptjs from "bcryptjs";
 import { generarJwt, userProps } from "../helpers";
 
@@ -39,6 +39,7 @@ export const createUser = async (req, res = response) => {
 
 export const loginUser = async (req, res = response) => {
   const { email, password } = req.body;
+  console.log({ body: req.body });
   try {
     const usuario = await UsuarioModel.findOne({ email });
     if (!usuario) {

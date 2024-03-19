@@ -19,6 +19,11 @@ const UsuarioSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    roles: [
+      {
+        type: String,
+      },
+    ],
   },
   { timestamps: true }
 );
